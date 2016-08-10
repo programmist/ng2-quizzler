@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -9,7 +10,12 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
   title = "Login";
 
-  constructor() { }
+  constructor(private router: Router) { }
+
+  // TODO: Implement actual login. For now, just route to quiz.
+  login() {
+    this.router.navigateByUrl('/quiz');
+  }
 
   ngOnInit() {
   }
