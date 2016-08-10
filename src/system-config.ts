@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 // SystemJS configuration file, see links for more information
 // https://github.com/systemjs/systemjs
@@ -36,6 +36,11 @@ const barrels: string[] = [
   // App specific barrels.
   'app',
   'app/shared',
+  'app/quiz-component',
+  'app/quiz',
+  'app/login',
+  'app/question',
+  'app/results',
   /** @cli-barrel */
 ];
 
