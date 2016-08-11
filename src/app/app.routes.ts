@@ -1,10 +1,16 @@
-import { provideRouter, RouterConfig } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
+
 import { LoginComponent } from './login/login.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { QuestionComponent } from './question/question.component';
 import { ResultsComponent } from './results/results.component';
 
-const routes: RouterConfig = [
+const appRoutes: Routes = [
+  {
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full'
+  },
   {
     path: 'login',
     component: LoginComponent
@@ -20,14 +26,7 @@ const routes: RouterConfig = [
   {
     path: 'results/',
     component: ResultsComponent
-  },
-  {
-    path: '',
-    redirectTo: '/login',
-    pathMatch: 'full'
   }
-]
-
-export const appRouterProviders = [
-  provideRouter(routes)
 ];
+
+export const routing = RouterModule.forRoot(appRoutes);
