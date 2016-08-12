@@ -1,11 +1,14 @@
-<div class="quiz-main" *ngIf="quiz">
+<div class="quiz-main" *ngIf="quizLoaded">
   <div class="quiz-title">
-    <h1>Quiz: '{{ quiz.name }}'</h1>
+    <h1>Quiz: '{{ quizName }}'</h1>
   </div>
 
   <div class="card card-block question-block">
     <h4 class="card-title">{{ currentQuestion.question }}</h4>
-    <div class="details" *ngIf="currentQuestion && currentQuestion.details" [innerHTML]="currentQuestion.details"></div>
+    <div class="details"
+         *ngIf="currentQuestion && currentQuestion.details"
+         [innerHTML]="currentQuestion.details">
+    </div>
     <div class="choices">
       <div *ngFor="let choice of currentQuestion.choices">
         <input type="radio" name="answer" [value]="choice">

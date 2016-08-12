@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Http, Headers, Response } from '@angular/http';
-import { Observable, Subject } from 'rxjs/Rx';
 
 import { QuestionComponent } from '../question/question.component';
+import { Question } from "./model/question";
+import {QuizDataService} from "./quiz-data.service";
+
 
 @Component({
   moduleId: module.id,
@@ -12,45 +13,29 @@ import { QuestionComponent } from '../question/question.component';
   directives: [QuestionComponent]
 })
 export class QuizComponent implements OnInit {
-  quiz: Quiz;
-  currentIndex: number = 0;
+  quizLoaded: boolean = false;
+  currentIndex: number = 1;
   lastQuestion: boolean = false;
   currentQuestion: Question;
 
-  constructor(private http: Http) { }
+  get quizName() {
+    return this.quiz.quizName;
+  }
+
+  constructor(
+    private quiz: QuizDataService
+  ) { }
 
   getNextQuestion() {
-    this.currentQuestion = this.quiz.questions[this.currentIndex];
-    this.lastQuestion = (this.currentIndex === this.quiz.questions.length - 1);
+    this.currentQuestion = this.quiz.getQuestion(this.currentIndex);
+    this.lastQuestion = (this.currentIndex === this.quiz.questionCount);
     if (!this.lastQuestion) this.currentIndex++;
   }
 
   ngOnInit() {
-    let headers = new Headers();
-    headers.append('Accept', 'application/json');
-    this.http
-      .get('/assets/quiz_1.json', {headers: headers})
-      .map((r: Response) => r.json() as Quiz)
-      .subscribe(
-        data => {
-          this.quiz = data;
-          this.getNextQuestion();
-        },
-        err => console.error(err),
-        () => console.log('quiz retrieved')
-      )
+    this.quiz.loadQuiz(1).then(() => {
+      this.getNextQuestion();
+      this.quizLoaded = true;
+    });
   }
-}
-
-export class Question {
-  question: string;
-  details: string;
-  choices: string[];
-  answer: string;
-}
-
-export class Quiz {
-  uid: number;
-  name: string;
-  questions: Question[];
 }
