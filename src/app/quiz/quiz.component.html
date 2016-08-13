@@ -5,12 +5,14 @@
 
   <div class="card card-block question-block">
     <qz-question [question]="currentQuestion"></qz-question>
-    <button class="btn btn-primary" (click)="getNextQuestion()">
-      <span [ngSwitch]="lastQuestion">
-        <span *ngSwitchCase="true">Submit &gt;</span>
-        <span *ngSwitchDefault>Continue &gt;</span>
-      </span>
-    </button>
+    <div [ngSwitch]="lastQuestion">
+      <button class="btn btn-primary"
+              *ngSwitchCase="true"
+              (click)="submit()">Submit &gt;</button>
+      <button class="btn btn-primary"
+              *ngSwitchDefault
+              (click)="getNextQuestion()">Continue &gt;</button>
+    </div>
   </div>
 </div>
 

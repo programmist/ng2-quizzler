@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {QuizDataService} from "../shared/quiz-data/quiz-data.service";
+import {Question} from "../shared/model/question";
 
 @Component({
   moduleId: module.id,
@@ -7,10 +9,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['results.component.css']
 })
 export class ResultsComponent implements OnInit {
+  results: Question[];
 
-  constructor() { }
-
-  ngOnInit() {
+  get quizName() {
+    return this.quiz.quizName;
   }
 
+  constructor(
+    private quiz: QuizDataService
+  ) { }
+
+  ngOnInit() {
+    this.results = this.quiz.results;
+  }
 }

@@ -1,5 +1,6 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {Question} from "../quiz/model/question";
+import {Question} from "../../shared/model/question";
+
 
 @Component({
   moduleId: module.id,

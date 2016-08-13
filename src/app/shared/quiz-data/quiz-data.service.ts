@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Http, Headers, Response } from '@angular/http';
-import {Quiz} from "./model/quiz";
-import {Question} from "./model/question";
+import {Quiz} from "../model/quiz";
+import {Question} from "../model/question";
 
 @Injectable()
 export class QuizDataService {
@@ -16,6 +16,10 @@ export class QuizDataService {
     return this.quiz.name;
   }
 
+  get results() {
+    return this.quiz.questions.slice(0);
+  }
+
   constructor(private http: Http) { }
 
   loadQuiz(uuid: number) {
@@ -28,10 +32,10 @@ export class QuizDataService {
     headers.append('Accept', 'application/json');
     this.http
       .get(`/assets/quiz_${uuid}.json`, {headers: headers})
-      .map((r: Response) => r.json())
+      .map((r: Response) => <Quiz>r.json())
       .subscribe(
         data => {
-          this.quiz = data as Quiz;
+          this.quiz = data;
           this.questions = this.quiz.questions.reduce((map, question, i) => {
             map.set(i + 1, question);
             return map;

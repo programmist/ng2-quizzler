@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { QuestionComponent } from '../question/question.component';
-import { Question } from "./model/question";
-import {QuizDataService} from "./quiz-data.service";
+import { QuestionComponent } from './question/question.component';
+import { Question } from "../shared/model/question";
+import {QuizDataService} from "../shared/quiz-data/quiz-data.service";
 
 
 @Component({
@@ -23,6 +24,7 @@ export class QuizComponent implements OnInit {
   }
 
   constructor(
+    private router: Router,
     private quiz: QuizDataService
   ) { }
 
@@ -30,6 +32,10 @@ export class QuizComponent implements OnInit {
     this.currentQuestion = this.quiz.getQuestion(this.currentIndex);
     this.lastQuestion = (this.currentIndex === this.quiz.questionCount);
     if (!this.lastQuestion) this.currentIndex++;
+  }
+
+  submit() {
+    this.router.navigateByUrl('/results')
   }
 
   ngOnInit() {

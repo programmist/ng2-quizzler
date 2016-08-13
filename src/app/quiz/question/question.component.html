@@ -7,7 +7,7 @@
   <div class="choices">
     <div *ngFor="let choice of question.choices; let i = index">
       <input type="radio"
-             [(ngModel)]="question.answer"
+             [(ngModel)]="question.chosenAnswer"
              name="answer"
              [value]="i">
       <label>{{ choice }}</label>

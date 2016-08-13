@@ -1,3 +1,28 @@
-<p>
-  results works!
-</p>
+<div class="quiz-results-main">
+  <div class="quiz-title">
+    <h1>Quiz Scoring Results: '{{ quizName }}'</h1>
+  </div>
+
+  <div class="card card-block question-block">
+
+    <div class="result">
+      <h4 class="card-title">{{ result.question }}</h4>
+      <div class="details"
+           *ngIf="result && result.details"
+           [innerHTML]="result.details">
+      </div>
+      <div class="choices">
+        <div *ngFor="let choice of result.choices; let i = index">
+          <input type="radio"
+                 [(ngModel)]="question.answer"
+                 name="answer"
+                 [value]="i">
+          <label>{{ choice }}</label>
+        </div>
+      </div>
+    </div>
+
+
+    <button class="btn btn-primary">Logout</button>
+  </div>
+</div>
