@@ -4,17 +4,7 @@
   </div>
 
   <div class="card card-block question-block">
-    <h4 class="card-title">{{ currentQuestion.question }}</h4>
-    <div class="details"
-         *ngIf="currentQuestion && currentQuestion.details"
-         [innerHTML]="currentQuestion.details">
-    </div>
-    <div class="choices">
-      <div *ngFor="let choice of currentQuestion.choices">
-        <input type="radio" name="answer" [value]="choice">
-        <label>{{ choice }}</label>
-      </div>
-    </div>
+    <qz-question [question]="currentQuestion"></qz-question>
     <button class="btn btn-primary" (click)="getNextQuestion()">
       <span [ngSwitch]="lastQuestion">
         <span *ngSwitchCase="true">Submit &gt;</span>
