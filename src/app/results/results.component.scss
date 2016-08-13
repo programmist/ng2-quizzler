@@ -2,3 +2,65 @@
   font-family: 'Roboto', 'PT Sans', sans-serif;
 }
 
+.quiz-results-main {
+  width: 100%;
+  max-width: 650px;
+  margin: auto;
+
+  border: 0;
+}
+
+.quiz-title {
+  padding-top: 50px;
+  text-align: center;
+  h1 {
+    font-size: 22px;
+    padding-bottom: 10px;
+    display: block;
+    font-weight: 300;
+    color: #1e347b;
+  }
+}
+
+.result-percent {
+  width: 90%;
+  background-color: #94D9FF;
+  margin: auto auto 25px;
+  border-radius: 10px;
+  border: 0;
+  .card-title {
+    font-size: 22px;
+    text-align: center;
+    margin: 0;
+    padding: 5px;
+  }
+  .percent-number {
+    background-color: #FFFB95;
+    padding: 5px 5px 5px 8px;
+    border: 1px solid #c0c0c0;
+  }
+}
+
+.result-block {
+  width: 100%;
+  max-width: 650px;
+  margin: 50px auto auto;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  border: 0;
+  & * {
+    font-size: 19px;
+    color: rgb(123, 137, 211);
+  }
+  .message {
+    color: #000;
+  }
+}
+
+.incorrect {
+  background-color: #FCE1E1;
+}
+
+.correct {
+  background-color: #DEFACE;
+}

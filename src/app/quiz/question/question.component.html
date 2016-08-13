@@ -6,11 +6,14 @@
   </div>
   <div class="choices">
     <div *ngFor="let choice of question.choices; let i = index">
-      <input type="radio"
-             [(ngModel)]="question.chosenAnswer"
-             name="answer"
-             [value]="i">
-      <label>{{ choice }}</label>
+
+      <label>
+        <input type="radio"
+               [(ngModel)]="question.chosenAnswer"
+               name="answer"
+               [value]="i">
+        {{ choice }}
+      </label>
     </div>
   </div>
 </div>

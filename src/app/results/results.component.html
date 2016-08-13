@@ -1,28 +1,44 @@
-<div class="quiz-results-main">
+<div class="quiz-results-main" *ngIf="results">
   <div class="quiz-title">
     <h1>Quiz Scoring Results: '{{ quizName }}'</h1>
   </div>
 
-  <div class="card card-block question-block">
+  <div class="card card-block result-percent">
+    <h4 class="card-title">
+      Your quiz score is
+      <span class="percent-number">
+        {{ percentCorrect | percent:'1.1-1' }}
+      </span> correct.
+    </h4>
+  </div>
 
+  <div class="card card-block result-block"
+       *ngFor="let result of results; let i = index">
     <div class="result">
-      <h4 class="card-title">{{ result.question }}</h4>
+      <h4 class="card-title question">{{i+1}}. {{ result.question }}</h4>
       <div class="details"
-           *ngIf="result && result.details"
+           *ngIf="result.details"
            [innerHTML]="result.details">
       </div>
-      <div class="choices">
-        <div *ngFor="let choice of result.choices; let i = index">
-          <input type="radio"
-                 [(ngModel)]="question.answer"
-                 name="answer"
-                 [value]="i">
-          <label>{{ choice }}</label>
+      <div class="card card-block answer-block"
+           [ngClass]="{correct: result.isCorrect, incorrect: !result.isCorrect}">
+        <div [ngSwitch]="result.isCorrect">
+          <!-- Correct Answer -->
+          <div *ngSwitchCase="true">
+            <p class="message">Correct:</p>
+            <p>{{ result.correctText }}</p>
+          </div>
+
+          <!-- Wrong Answer -->
+          <div *ngSwitchCase="false">
+            <p class="message">You answered incorrectly:</p>
+            <p>{{ result.incorrectText || 'NO ANSWER GIVEN' }}</p>
+            <p class="message">Correct answer was:</p>
+            <p>{{ result.correctText }}</p>
+          </div>
         </div>
       </div>
     </div>
-
-
-    <button class="btn btn-primary">Logout</button>
   </div>
+  <button class="btn btn-primary" (click)="logout()">Logout</button>
 </div>

@@ -32,7 +32,7 @@ export class QuizDataService {
     headers.append('Accept', 'application/json');
     this.http
       .get(`/assets/quiz_${uuid}.json`, {headers: headers})
-      .map((r: Response) => <Quiz>r.json())
+      .map((r: Response) => new Quiz(r.json()))
       .subscribe(
         data => {
           this.quiz = data;

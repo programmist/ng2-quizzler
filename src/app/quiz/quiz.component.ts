@@ -16,11 +16,19 @@ import {QuizDataService} from "../shared/quiz-data/quiz-data.service";
 export class QuizComponent implements OnInit {
   quizLoaded: boolean = false;
   currentIndex: number = 1;
-  lastQuestion: boolean = false;
+  // lastQuestion: boolean = false;
   currentQuestion: Question;
 
-  get quizName() {
+  get quizName(): string {
     return this.quiz.quizName;
+  }
+
+  get lastQuestion(): boolean {
+    return this.currentIndex === this.quiz.questionCount;
+  }
+
+  get firstQuestion(): boolean {
+    return this.currentIndex == 1;
   }
 
   constructor(
@@ -28,19 +36,23 @@ export class QuizComponent implements OnInit {
     private quiz: QuizDataService
   ) { }
 
-  getNextQuestion() {
+  nextQuestion(): void {
+    this.currentIndex++;
     this.currentQuestion = this.quiz.getQuestion(this.currentIndex);
-    this.lastQuestion = (this.currentIndex === this.quiz.questionCount);
-    if (!this.lastQuestion) this.currentIndex++;
   }
 
-  submit() {
+  previousQuestion(): void {
+    this.currentIndex--;
+    this.currentQuestion = this.quiz.getQuestion(this.currentIndex);
+  }
+
+  submit(): void {
     this.router.navigateByUrl('/results')
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.quiz.loadQuiz(1).then(() => {
-      this.getNextQuestion();
+      this.currentQuestion = this.quiz.getQuestion(this.currentIndex);
       this.quizLoaded = true;
     });
   }

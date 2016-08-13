@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {QuizDataService} from "../shared/quiz-data/quiz-data.service";
 import {Question} from "../shared/model/question";
+import {AuthService} from "../login/auth.service";
 
 @Component({
   moduleId: module.id,
@@ -15,11 +16,22 @@ export class ResultsComponent implements OnInit {
     return this.quiz.quizName;
   }
 
+  get percentCorrect() {
+    return this.results.reduce((sum, result) => {
+      return result.isCorrect ? sum + 1 : sum;
+    }, 0) / this.results.length;
+  }
+
   constructor(
+    private auth: AuthService,
     private quiz: QuizDataService
   ) { }
 
   ngOnInit() {
     this.results = this.quiz.results;
+  }
+
+  logout() {
+    this.auth.logout();
   }
 }

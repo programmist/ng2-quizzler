@@ -15,12 +15,22 @@
   padding-top: 50px;
   text-align: center;
   h1 {
-    font-size: 1.6em;
+    font-size: 22px;
     font-weight: 300;
     color: #1e347b;
   }
 }
 
-button {
-  float: right;
+.actions {
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+  button {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 5px;
+  }
+
 }
+
+
