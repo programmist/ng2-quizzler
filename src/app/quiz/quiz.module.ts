@@ -2,9 +2,9 @@ import { NgModule }       from '@angular/core';
 import { CommonModule }   from '@angular/common';
 import { FormsModule }    from '@angular/forms';
 
-import {QuizDataService} from "../shared/quiz-data/quiz-data.service";
-import {QuizComponent} from "./quiz.component";
-import {quizRouting} from "./quiz.routing";
+import {QuizDataService} from '../shared/quiz-data/quiz-data.service';
+import {QuizComponent} from './quiz.component';
+import {quizRouting} from './quiz.routing';
 
 @NgModule({
   imports: [

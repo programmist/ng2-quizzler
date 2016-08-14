@@ -12,7 +12,7 @@ export class AuthService {
 
   logout(): void {
     // TODO: Log out
-    console.log("LOGOUT");
+    console.log('LOGOUT');
   }
 
 }

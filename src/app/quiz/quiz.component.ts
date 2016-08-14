@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { QuestionComponent } from './question/question.component';
-import { Question } from "../shared/model/question";
-import {QuizDataService} from "../shared/quiz-data/quiz-data.service";
+import { Question } from '../shared/model/question';
+import {QuizDataService} from '../shared/quiz-data/quiz-data.service';
 
 
 @Component({
@@ -28,7 +28,7 @@ export class QuizComponent implements OnInit {
   }
 
   get firstQuestion(): boolean {
-    return this.currentIndex == 1;
+    return this.currentIndex === 1;
   }
 
   constructor(
@@ -47,7 +47,7 @@ export class QuizComponent implements OnInit {
   }
 
   submit(): void {
-    this.router.navigateByUrl('/results')
+    this.router.navigateByUrl('/results');
   }
 
   ngOnInit(): void {

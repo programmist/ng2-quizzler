@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {Question} from "../../shared/model/question";
+import {Question} from '../../shared/model/question';
 
 
 @Component({

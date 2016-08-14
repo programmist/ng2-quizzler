@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {QuizDataService} from "../shared/quiz-data/quiz-data.service";
-import {Question} from "../shared/model/question";
-import {AuthService} from "../login/auth.service";
+import {Component, OnInit} from '@angular/core';
+import {QuizDataService} from '../shared/quiz-data/quiz-data.service';
+import {Question} from '../shared/model/question';
+import {AuthService} from '../login/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -23,6 +24,7 @@ export class ResultsComponent implements OnInit {
   }
 
   constructor(
+    private router: Router,
     private auth: AuthService,
     private quiz: QuizDataService
   ) { }
@@ -33,5 +35,6 @@ export class ResultsComponent implements OnInit {
 
   logout() {
     this.auth.logout();
+    this.router.navigateByUrl('/login');
   }
 }

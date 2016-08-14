@@ -8,12 +8,12 @@ export class Question {
   constructor(json: any) {
     this.question = json.question;
     this.details = json.details;
-    this.answer = json.answer as number;
+    this.answer = parseInt(json.answer);
     this.choices = json.choices;
   }
 
   get isCorrect() {
-    return this.answer == this.chosenAnswer;
+    return this.answer === this.chosenAnswer;
   }
 
   get correctText() {
