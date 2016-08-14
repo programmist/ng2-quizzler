@@ -1,5 +1,7 @@
 # Ng2Quizzler
 
+An Angular 2 implementation of [Quizzler](https://github.com/ThomasBurleson/angularjs-Quizzler) (Work in Progress!)
+
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.10.
 
 ## Development server
