@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {AuthService} from "./auth.service";
 
 @Component({
   moduleId: module.id,
@@ -10,11 +11,17 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   title = "Login";
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private auth: AuthService
+  ) { }
 
-  // TODO: Implement actual login. For now, just route to quiz.
-  login() {
-    this.router.navigateByUrl('/quiz');
+  login(email: string, password: string) {
+    if (this.auth.login(email, password)) {
+      this.router.navigateByUrl('quiz');
+    } else {
+      // TODO: Failed login
+    }
   }
 
   ngOnInit() {

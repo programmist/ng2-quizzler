@@ -1,7 +1,7 @@
 <div class="quiz-main" *ngIf="quizLoaded">
-  <div class="quiz-title">
+  <header class="quiz-title">
     <h1>Quiz: '{{ quizName }}'</h1>
-  </div>
+  </header>
 
   <div class="card card-block question-block">
     <qz-question [question]="currentQuestion"></qz-question>

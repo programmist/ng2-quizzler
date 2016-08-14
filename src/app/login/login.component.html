@@ -1,21 +1,11 @@
-<div class="login-box">
-
+<div class="login-main">
   <header>
-    <div class="section-title">
-      <h1>Quizzler Online</h1>
-    </div>
+    <h1>Quizzler Online</h1>
   </header>
 
-  <div class="login-content">
-    <div class="section-title">
-      <h3>LogIn to your Account</h3>
-      <p>
-        Hello. Great to see you again!
-      </p>
-      <div class="login_messsage">
-        The username or password you entered was incorrect.
-      </div>
-    </div>
+  <div class="card card-block">
+    <h3 class="card-title">Log In to your account</h3>
+    <p class="card-text small">Hello. Great to see you again!</p>
 
     <form name="login">
       <div class="form-group">
@@ -28,23 +18,7 @@
         <label for="exampleInputPassword1">Password</label>
         <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
       </div>
-
-      <button type="submit" class="btn btn-primary" (click)="login()">Submit</button>
+      <button type="submit" class="btn btn-success" (click)="login()">Login</button>
     </form>
-
-  </div>
-
-  <div class="login-form-links link1" >
-    <h4 class="blue">Don't have an Account?</h4>
-    <span>No worry</span>
-    <a href="#" class="blue">Click Here</a>
-    <span>to Register</span>
-  </div>
-
-  <div class="login-form-links link2">
-    <h4 class="blue">Forget your Password?</h4>
-    <span>Dont worry</span>
-    <a href="#" class="blue">Click Here</a>
-    <span>to Get New One</span>
   </div>
 </div>

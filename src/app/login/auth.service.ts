@@ -5,7 +5,12 @@ export class AuthService {
 
   constructor() { }
 
-  logout() {
+  login(email: string, password: string): boolean {
+    // TODO: implement auth logic.
+    return true;
+  }
+
+  logout(): void {
     // TODO: Log out
     console.log("LOGOUT");
   }

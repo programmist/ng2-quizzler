@@ -1,7 +1,30 @@
-.login-box {
+.login-main {
   width: 100%;
   max-width: 360px;
   margin: auto;
+  padding-top: 50px;
+  & * {
+    font-family: 'Roboto', 'PT Sans', sans-serif;
+  }
+  header {
+    padding: 10px 0 10px 0;
+  }
+  h1 {
+    color: #1e347b;
+    text-align: center;
+    padding: 5px;
+    font-weight: 300;
+    font-size: 36px;
+  }
+  .card-title {
+    color: #3498db;
+    font-size: 25px;
+  }
+}
+
+.card-block {
+  border: 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .login-content {
