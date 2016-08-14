@@ -1,6 +1,7 @@
 .quiz-results-main {
   width: 100%;
-  max-width: 650px;
+  height: 100%;
+  max-width: 750px;
   margin: auto;
   border: 0;
   & * {
@@ -36,13 +37,19 @@
     background-color: #FFFB95;
     padding: 5px 5px 5px 8px;
     border: 1px solid #c0c0c0;
+    margin-right: 5px;
   }
+}
+
+.results-pane {
+  overflow: auto;
+  max-height: 800px;
 }
 
 .result-block {
   width: 100%;
-  max-width: 650px;
-  margin: 50px auto auto;
+  max-width: 700px;
+  margin: auto auto 20px auto;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   border: 0;

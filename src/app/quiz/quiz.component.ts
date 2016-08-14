@@ -16,7 +16,6 @@ import {QuizDataService} from '../shared/quiz-data/quiz-data.service';
 export class QuizComponent implements OnInit {
   quizLoaded: boolean = false;
   currentIndex: number = 1;
-  // lastQuestion: boolean = false;
   currentQuestion: Question;
 
   get quizName(): string {
