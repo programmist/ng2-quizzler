@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import {AuthService} from './auth.service';
 
@@ -8,7 +8,7 @@ import {AuthService} from './auth.service';
   templateUrl: 'login.component.html',
   styleUrls: ['login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   title = 'Login';
 
   constructor(
@@ -16,15 +16,11 @@ export class LoginComponent implements OnInit {
     private auth: AuthService
   ) { }
 
-  login(email: string, password: string) {
+  login(email: string, password: string): void {
     if (this.auth.login(email, password)) {
       this.router.navigateByUrl('quiz');
     } else {
       // TODO: Failed login
     }
   }
-
-  ngOnInit() {
-  }
-
 }

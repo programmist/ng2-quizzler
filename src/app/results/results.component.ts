@@ -13,27 +13,27 @@ import {Router} from "@angular/router";
 export class ResultsComponent implements OnInit {
   results: Question[];
 
-  get quizName() {
-    return this.quiz.quizName;
-  }
-
-  get percentCorrect() {
-    return this.results.reduce((sum, result) => {
-      return result.isCorrect ? sum + 1 : sum;
-    }, 0) / this.results.length;
-  }
-
   constructor(
     private router: Router,
     private auth: AuthService,
     private quiz: QuizDataService
   ) { }
 
-  ngOnInit() {
+  get quizName(): string {
+    return this.quiz.quizName;
+  }
+
+  get percentCorrect(): number {
+    return this.results.reduce((sum, result) => {
+      return result.isCorrect ? sum + 1 : sum;
+    }, 0) / this.results.length;
+  }
+
+  ngOnInit(): void {
     this.results = this.quiz.results;
   }
 
-  logout() {
+  logout(): void {
     this.auth.logout();
     this.router.navigateByUrl('/login');
   }

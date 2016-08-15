@@ -8,6 +8,10 @@ export class QuizDataService {
   private quiz: Quiz;
   private questions: Map<number, Question>;
 
+  get quizloaded(): boolean {
+    return this.quiz != null;
+  }
+
   get questionCount(): number {
     return this.questions.size;
   }
@@ -16,15 +20,15 @@ export class QuizDataService {
     return this.quiz.name;
   }
 
-  get results() {
+  get results(): Question[] {
     return this.quiz.questions.slice(0);
   }
 
   constructor(private http: Http) { }
 
-  loadQuiz(uuid: number) {
+  loadQuiz(uuid: number): Promise<void> {
     let resolver;
-    const finished: Promise<any> = new Promise((resolve, reject) => {
+    const finished: Promise<void> = new Promise<void>((resolve, reject) => {
       resolver = resolve;
     });
 
@@ -48,7 +52,7 @@ export class QuizDataService {
     return finished;
   }
 
-  getQuestion(qNumber: number) {
+  getQuestion(qNumber: number): Question {
     return this.questions.get(qNumber);
   }
 }

@@ -14,5 +14,4 @@ export class AuthService {
     // TODO: Log out
     console.log('LOGOUT');
   }
-
 }
