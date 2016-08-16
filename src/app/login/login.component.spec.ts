@@ -1,20 +1,28 @@
 /* tslint:disable:no-unused-variable */
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {async} from "@angular/core/testing/async";
+import {Router} from "@angular/router";
 
 import { LoginComponent } from './login.component';
 import {AuthService} from "./auth.service";
-import {async} from "@angular/core/testing/async";
+
+class MockRouter {
+  navigate = jasmine.createSpy("navigate");
+  navigateByUrl = jasmine.createSpy("navigateByUrl");
+}
 
 class MockAuthService {
   static authorized: boolean = false;
   login(email: string, password: string) {
-    MockAuthService.authorized = true;
+    return MockAuthService.authorized;
   }
   logout() {
     MockAuthService.authorized = false;
   }
 };
+
+let mockRouter = new MockRouter();
 
 describe('Component: Login', () => {
   let fixture: ComponentFixture<LoginComponent>;
@@ -23,46 +31,51 @@ describe('Component: Login', () => {
     TestBed.configureTestingModule({
       declarations: [LoginComponent],
       providers: [
-        {provide: AuthService, useValue: new MockAuthService()}
+        {provide: AuthService, useClass: MockAuthService},
+        {provide: Router, useValue: mockRouter},
       ]
-    }).compileComponents();
+    }).compileComponents().catch((e) => console.error(e));
     MockAuthService.authorized = false;
   });
 
-  it('should create an instance', () => {
-    TestBed.compileComponents().then(() => {
-      fixture = TestBed.createComponent(LoginComponent);
-      let loginSvc = fixture.debugElement.injector.get(LoginComponent);
-      expect(loginSvc).toBeTruthy();
-    });
+  describe('When initialized', () => {
+    it('should create an instance', async(() => {
+      TestBed.compileComponents().then(() => {
+        fixture = TestBed.createComponent(LoginComponent);
+        fixture.detectChanges();
+        let loginSvc = fixture.debugElement.injector.get(LoginComponent);
+        expect(loginSvc).toBeTruthy();
+      });
+    }));
   });
 
-  // TODO: Probably better as e2e tests
   describe('When a user logs in', () => {
-    beforeEach(() => {
-      TestBed.compileComponents();
-    });
-
     describe('and uses the correct credentials ', () => {
-      it('should navigate to the quiz', () => {
+      it('should navigate to the quiz', async(() => {
         TestBed.compileComponents().then(() => {
+          mockRouter.navigateByUrl.calls.reset();
+          fixture = TestBed.createComponent(LoginComponent);
+          fixture.detectChanges();
           let loginSvc = fixture.debugElement.injector.get(LoginComponent);
           MockAuthService.authorized = true;
           loginSvc.login('a@b.com', 'xxxxx');
-          // TODO: detect route change to quiz
+          expect(mockRouter.navigateByUrl).toHaveBeenCalledWith('quiz');
         });
-      });
+      }));
     });
 
     describe('and uses the wrong credentials ', () => {
-      it('login should remain at the login page', () => {
+      it('login should remain at the login page', async(() => {
         TestBed.compileComponents().then(() => {
+          mockRouter.navigateByUrl.calls.reset();
+          fixture = TestBed.createComponent(LoginComponent);
+          fixture.detectChanges();
           let loginSvc = fixture.debugElement.injector.get(LoginComponent);
-          MockAuthService.authorized = true;
+          MockAuthService.authorized = false;
           loginSvc.login('a@b.com', 'xxxxx');
-          // TODO: route should not change
+          expect(mockRouter.navigateByUrl).not.toHaveBeenCalled();
         });
-      });
+      }));
     });
   });
 });
