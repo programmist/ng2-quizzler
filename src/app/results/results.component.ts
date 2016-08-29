@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {QuizDataService} from '../shared/quiz-data/quiz-data.service';
-import {Question} from '../shared/model/question';
-import {AuthService} from '../login/auth.service';
-import {Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { QuizDataService } from '../shared/quiz-data/quiz-data.service';
+import { Question } from '../shared/model/question';
+import { AuthService } from '../auth/auth.service';
+import { Router } from "@angular/router";
 
 @Component({
   moduleId: module.id,

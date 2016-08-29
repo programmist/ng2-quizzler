@@ -2,13 +2,14 @@ import { NgModule }       from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { FormsModule }    from '@angular/forms';
 import { HttpModule }     from '@angular/http';
-import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 
 import { routing }        from './app.routes';
 
 import { AppComponent }   from './app.component';
 import { QuizDataService }  from './shared/quiz-data/quiz-data.service';
 
+import { AuthModule } from "./auth/auth.module";
 import { QuizModule }       from './quiz/quiz.module';
 import { ResultsModule }    from './results/results.module';
 import { LoginModule }      from './login/login.module';
@@ -21,13 +22,23 @@ export const firebaseConfig = {
   storageBucket: "ng2-quizzler.appspot.com"
 };
 
+const myFirebaseAuthConfig = {
+  provider: AuthProviders.Password,
+  method: AuthMethods.Password
+};
+
+const angularFireConfig = AngularFireModule.initializeApp(
+  firebaseConfig, myFirebaseAuthConfig
+);
+
 @NgModule({
   imports: [
     BrowserModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    angularFireConfig,
     FormsModule,
     routing,
     HttpModule,
+    AuthModule,
     QuizModule,
     ResultsModule,
     LoginModule

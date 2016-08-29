@@ -5,7 +5,7 @@ import {async} from "@angular/core/testing/async";
 import {Router} from "@angular/router";
 
 import { LoginComponent } from './login.component';
-import {AuthService} from "./auth.service";
+import {AuthService} from "../auth/auth.service";
 
 class MockRouter {
   navigate = jasmine.createSpy("navigate");

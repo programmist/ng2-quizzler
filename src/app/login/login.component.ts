@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import {AuthService} from './auth.service';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   moduleId: module.id,
@@ -13,14 +13,19 @@ export class LoginComponent {
 
   constructor(
     private router: Router,
-    private auth: AuthService
+    private authService: AuthService
   ) { }
 
+  get user() { return this.authService.auth; }
+
   login(email: string, password: string): void {
-    if (this.auth.login(email, password)) {
-      this.router.navigateByUrl('quiz');
-    } else {
-      // TODO: Failed login
-    }
+    this.authService.login(email, password).then(() => {
+      const url = this.authService.redirectUrl || '/quiz';
+      this.router.navigate([url]);
+    });
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }
