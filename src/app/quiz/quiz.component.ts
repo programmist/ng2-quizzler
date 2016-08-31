@@ -3,7 +3,9 @@ import { Router } from '@angular/router';
 
 import { QuestionComponent } from './question/question.component';
 import { Question } from '../shared/model/question';
-import {QuizDataService} from '../shared/quiz-data/quiz-data.service';
+import { QuizService } from '../shared/quiz-data/quiz.service';
+import { Quiz } from "../shared/model/quiz";
+import 'rxjs/add/operator/do';
 
 
 @Component({
@@ -14,47 +16,40 @@ import {QuizDataService} from '../shared/quiz-data/quiz-data.service';
   directives: [QuestionComponent]
 })
 export class QuizComponent implements OnInit {
-  currentIndex: number = 1;
+  currentIndex: number = 0;
+  quiz: Quiz;
+  currentQuestion: Question;
+  results: Question[] = [];
 
   constructor(
     private router: Router,
-    private quiz: QuizDataService
+    private quizService: QuizService
   ) { }
 
-  get quizLoaded(): boolean {
-    return this.quiz.quizloaded;
-  }
-
-  get currentQuestion(): Question {
-    return this.quiz.getQuestion(this.currentIndex);
-  }
-
-  get quizName(): string {
-    return this.quiz.quizName;
-  }
-
   get lastQuestion(): boolean {
-    return this.currentIndex === this.quiz.questionCount;
-  }
-
-  get firstQuestion(): boolean {
-    return this.currentIndex === 1;
+    return this.currentIndex === this.quiz.questions.length;
   }
 
   nextQuestion(): void {
     this.currentIndex++;
-  }
-
-  previousQuestion(): void {
-    this.currentIndex--;
+    this.quizService.getQuestion(this.currentIndex)
+      .subscribe(question => {
+        this.results.push(question);
+        this.currentQuestion = question;
+      });
   }
 
   submit(): void {
-    this.router.navigateByUrl('/results');
+    this.quizService.results = this.results.reverse();
+    this.router.navigate(['results']);
   }
 
   ngOnInit(): void {
-    this.quiz.loadQuiz(1).then(() => {
-    });
+    let subscription = this.quizService.loadQuiz(1)
+      .subscribe(quiz => {
+        this.quiz = quiz;
+        this.nextQuestion();
+        subscription.unsubscribe();
+      });
   }
 }

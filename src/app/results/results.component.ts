@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { QuizDataService } from '../shared/quiz-data/quiz-data.service';
+import { QuizService } from '../shared/quiz-data/quiz.service';
 import { Question } from '../shared/model/question';
 import { AuthService } from '../auth/auth.service';
 import { Router } from "@angular/router";
 
 @Component({
   moduleId: module.id,
-  selector: 'app-results',
   templateUrl: 'results.component.html',
   styleUrls: ['results.component.css']
 })
@@ -16,11 +15,11 @@ export class ResultsComponent implements OnInit {
   constructor(
     private router: Router,
     private auth: AuthService,
-    private quiz: QuizDataService
+    private quizService: QuizService
   ) { }
 
   get quizName(): string {
-    return this.quiz.quizName;
+    return this.quizService.quizName;
   }
 
   get percentCorrect(): number {
@@ -30,7 +29,7 @@ export class ResultsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.results = this.quiz.results;
+    this.results = this.quizService.results;
   }
 
   logout(): void {

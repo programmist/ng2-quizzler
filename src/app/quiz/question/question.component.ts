@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {Question} from '../../shared/model/question';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { Question } from '../../shared/model/question';
 
 
 @Component({
@@ -10,4 +10,10 @@ import {Question} from '../../shared/model/question';
 })
 export class QuestionComponent {
   @Input() question: Question;
+  @Input() actionText: string;
+  @Output() onAction = new EventEmitter();
+
+  takeAction() {
+    this.onAction.emit();
+  }
 }

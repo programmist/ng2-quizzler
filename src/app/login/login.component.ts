@@ -20,7 +20,7 @@ export class LoginComponent {
 
   login(email: string, password: string): void {
     this.authService.login(email, password).then(() => {
-      const url = this.authService.redirectUrl || '/quiz';
+      const url = this.authService.redirectUrl || 'quiz';
       this.router.navigate([url]);
     });
   }

@@ -1,19 +1,24 @@
-<div class="question">
-  <h4 class="card-title">{{ question.question }}</h4>
-  <div class="details"
-       *ngIf="question && question.details"
-       [innerHTML]="question.details">
-  </div>
-  <div class="choices">
-    <div *ngFor="let choice of question.choices; let i = index">
-
-      <label>
+<div class="card card-block question-block">
+  <div class="question">
+    <h4 class="card-title">{{ question.question }}</h4>
+    <div class="details"
+         *ngIf="question && question.details"
+         [innerHTML]="question.details">
+    </div>
+    <div class="choices">
+      <div *ngFor="let choice of question.choices; let i = index">
         <input type="radio"
                [(ngModel)]="question.chosenAnswer"
                name="answer"
+               [id]="'answer-' + i"
                [value]="i">
-        {{ choice }}
-      </label>
+        <label [attr.for]="'answer-' + i">{{ choice }}</label>
+      </div>
     </div>
+  </div>
+  <div class="actions">
+    <button class="btn btn-primary"
+            (click)="takeAction()">{{ actionText }} &gt;
+    </button>
   </div>
 </div>

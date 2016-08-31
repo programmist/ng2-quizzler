@@ -2,8 +2,8 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ResultsComponent } from './results.component';
-import {QuizDataService} from "../shared/quiz-data/quiz-data.service";
-import {MockQuizDataService} from "../shared/quiz-data/test/mock-quiz-data.service";
+import { QuizService } from "../shared/quiz-data/quiz.service";
+import { MockQuizDataService } from "../shared/quiz-data/test/mock-quiz-data.service";
 
 describe('Component: Results', () => {
   let fixture: ComponentFixture<ResultsComponent>;
@@ -12,7 +12,7 @@ describe('Component: Results', () => {
     TestBed.configureTestingModule({
       declarations: [ResultsComponent],
       providers: [
-        {provide: QuizDataService, useClass: MockQuizDataService}
+        {provide: QuizService, useClass: MockQuizDataService}
       ]
     });
   });

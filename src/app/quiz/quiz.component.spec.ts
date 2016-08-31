@@ -1,12 +1,11 @@
 /* tslint:disable:no-unused-variable */
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {async} from "@angular/core/testing/async";
 
-import {QuizComponent} from "./quiz.component";
-import {QuizDataService} from "../shared/quiz-data/quiz-data.service";
-import {MockQuizDataService} from "../shared/quiz-data/test/mock-quiz-data.service";
-import {RouterModule} from "@angular/router";
+import { QuizComponent } from "./quiz.component";
+import { QuizService } from "../shared/quiz-data/quiz.service";
+import { MockQuizDataService } from "../shared/quiz-data/test/mock-quiz-data.service";
+import { RouterModule } from "@angular/router";
 
 describe('Component: Quiz', () => {
   let fixture: ComponentFixture<QuizComponent>;
@@ -16,7 +15,7 @@ describe('Component: Quiz', () => {
       declarations: [QuizComponent],
       providers: [
         RouterModule,
-        {provide: QuizDataService, useClass: MockQuizDataService}
+        {provide: QuizService, useClass: MockQuizDataService}
       ]
     }).compileComponents();
   });

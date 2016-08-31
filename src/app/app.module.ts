@@ -7,7 +7,7 @@ import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { routing }        from './app.routes';
 
 import { AppComponent }   from './app.component';
-import { QuizDataService }  from './shared/quiz-data/quiz-data.service';
+import { QuizService }  from './shared/quiz-data/quiz.service';
 
 import { AuthModule } from "./auth/auth.module";
 import { QuizModule }       from './quiz/quiz.module';
@@ -47,7 +47,7 @@ const angularFireConfig = AngularFireModule.initializeApp(
     AppComponent
   ],
   providers: [
-    QuizDataService
+    QuizService
   ],
   bootstrap: [ AppComponent ]
 })

@@ -1,25 +1,14 @@
-<div class="quiz-main" *ngIf="quizLoaded">
+<div class="quiz-main" *ngIf="quiz">
   <header class="quiz-title">
-    <h1>Quiz: '{{ quizName }}'</h1>
+    <h1>Quiz: '{{ quiz.name }}'</h1>
   </header>
 
-  <div class="card card-block question-block">
-    <qz-question [question]="currentQuestion"></qz-question>
-    <div class="actions">
-      <button class="btn btn-secondary" *ngIf="!firstQuestion"
-              (click)="previousQuestion()">&lt; Previous
-      </button>
-      <div [ngSwitch]="lastQuestion">
-        <button class="btn btn-primary"
-                *ngSwitchCase="true"
-                (click)="submit()">Submit &gt;
-        </button>
-        <button class="btn btn-primary"
-                *ngSwitchDefault
-                (click)="nextQuestion()">Next &gt;
-        </button>
-      </div>
-    </div>
-  </div>
+  <qz-question
+    *ngIf="currentQuestion"
+    [question]="currentQuestion"
+    [actionText]="lastQuestion ? 'Submit' : 'Next'"
+    (onAction)="lastQuestion ? submit() : nextQuestion()">
+  </qz-question>
+
 </div>
 
